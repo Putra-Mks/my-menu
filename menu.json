@@ -15,5 +15,14 @@
             }
         ]
     },
-    "Minuman": {}
+    "Minuman": {
+        "Minuman Panas": [
+            {
+                "name": "Kopi Aren",
+                "image": "data_menu/Minuman/Minuman Panas/Kopi_Aren.jpeg",
+                "price": "Tanya Harga",
+                "desc": ""
+            }
+        ]
+    }
 }
