@@ -16,6 +16,12 @@
         ],
         "Makanan Pembuka": [
             {
+                "name": "Nasi Goreng",
+                "image": "data_menu/Makanan/Makanan Pembuka/Nasi_Goreng.jpeg",
+                "price": "Tanya Harga",
+                "desc": ""
+            },
+            {
                 "name": "Mie Jawa",
                 "image": "data_menu/Makanan/Makanan Pembuka/Mie_Jawa.jpeg",
                 "price": "Rp 35.000",
