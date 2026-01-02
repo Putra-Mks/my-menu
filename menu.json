@@ -46,10 +46,10 @@
         ],
         "Minuman Dingin": [
             {
-                "name": "Teh Susu",
-                "image": "data_menu/Minuman/Minuman Dingin/Teh_Susu.jpeg",
-                "price": "Tanya Harga",
-                "desc": ""
+                "name": "Juice Tomat",
+                "image": "data_menu/Minuman/Minuman Dingin/Juice_Tomat.jpeg",
+                "price": "Rp 15.000",
+                "desc": "Juice Tomat sgar dan bergizi"
             }
         ]
     }
