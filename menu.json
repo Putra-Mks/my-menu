@@ -13,6 +13,14 @@
                 "price": "Rp 35.000",
                 "desc": "Mie Jawa spesial dengan bumbu rahasia dan telur mata sapi."
             }
+        ],
+        "Makanan Pembuka": [
+            {
+                "name": "Mie Jawa",
+                "image": "data_menu/Makanan/Makanan Pembuka/Mie_Jawa.jpeg",
+                "price": "Rp 35.000",
+                "desc": "Mie Jawa spesial dengan bumbu rahasia dan telur mata sapi."
+            }
         ]
     },
     "Minuman": {
