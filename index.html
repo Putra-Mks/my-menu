@@ -3,91 +3,243 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu Digital Otomatis</title>
+    <title>Menu Digital - Premium Experience</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        /* CSS SAMA SEPERTI SEBELUMNYA, DITAMBAH GAYA UNTUK JUDUL KATEGORI */
-        body { background-color: #1a1a1a; color: #fff; font-family: sans-serif; padding: 20px; }
-        .category-header { color: #f39c12; border-bottom: 2px solid #333; margin: 30px 0 10px; padding-bottom: 5px; }
-        .subcategory-header { color: #ccc; margin: 20px 0 10px; font-size: 1.2rem; }
+        :root {
+            --primary-color: #f39c12;
+            --bg-dark: #121212;
+            --card-bg: #1e1e1e;
+            --text-light: #eeeeee;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background-color: var(--bg-dark); color: var(--text-light); line-height: 1.6; }
+
+        /* --- HEADER BARU --- */
+        header {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=500&q=80'); /* Background Header */
+            background-size: cover;
+            background-position: center;
+            padding: 50px 20px;
+            text-align: center;
+            border-bottom: 3px solid var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .logo-container {
+            width: 90px;
+            height: 90px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 4px solid #fff;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            overflow: hidden;
+        }
+
+        .logo-container img {
+            width: 70%;
+            height: auto;
+        }
+
+        header h1 { 
+            font-family: 'Playfair Display', serif; 
+            font-size: 2.2rem; 
+            color: var(--primary-color);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+
+        header p { font-size: 0.9rem; opacity: 0.9; margin-top: 5px; color: #fff; }
+
+        /* --- MENU GRID --- */
+        .container { padding: 0 15px; max-width: 600px; margin: auto; }
         
-        .menu-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
-        .menu-card { background: #222; border-radius: 10px; overflow: hidden; }
-        .menu-card img { width: 100%; height: 150px; object-fit: cover; }
-        .menu-name { padding: 10px; font-weight: bold; text-align: center; }
+        .category-header { 
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem; 
+            color: var(--primary-color); 
+            margin: 40px 0 15px;
+            text-align: center;
+        }
+
+        .subcategory-header {
+            font-size: 1.1rem;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .menu-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.2s;
+            cursor: pointer;
+        }
+
+        /* Efek Tekan Gambar */
+        .menu-card:active { transform: scale(0.95); }
+
+        .menu-card img {
+            width: 100%;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+        }
+
+        .menu-name {
+            padding: 10px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-align: center;
+            background: rgba(255,255,255,0.05);
+        }
+
+        /* --- ANIMASI MODAL (POP-UP) --- */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal.active { display: flex; opacity: 1; }
+
+        .modal-content {
+            background: #252525;
+            width: 85%;
+            max-width: 400px;
+            border-radius: 25px;
+            overflow: hidden;
+            transform: scale(0.7);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .modal.active .modal-content { transform: scale(1); }
+
+        .modal-img { width: 100%; height: 280px; object-fit: cover; }
         
-        /* Modal Style (Sama seperti sebelumnya) */
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); align-items: center; justify-content: center; z-index: 1000;}
-        .modal-content { background: #333; padding: 20px; border-radius: 10px; max-width: 90%; text-align: center; }
-        .modal-img { width: 100%; height: 200px; object-fit: cover; border-radius: 10px; }
-        .close-btn { background: #f39c12; border: none; padding: 10px 20px; margin-top: 15px; border-radius: 5px; cursor: pointer; font-weight: bold;}
+        .modal-info { padding: 25px; text-align: center; }
+        .modal-title { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--primary-color); margin-bottom: 5px; }
+        .modal-price { font-size: 1.3rem; font-weight: bold; margin-bottom: 15px; display: block; }
+        .modal-desc { font-size: 0.95rem; color: #bbb; margin-bottom: 25px; }
+
+        .close-btn {
+            background: var(--primary-color);
+            color: #000;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1rem;
+            width: 100%;
+        }
+
+        footer { text-align: center; padding: 40px 20px; color: #555; font-size: 0.8rem; }
     </style>
 </head>
 <body>
 
-    <h1 style="text-align:center; color:#f39c12;">MENU KAMI</h1>
-    <div id="menu-container">Loading menu...</div>
+    <header>
+        <div class="logo-container">
+            <img src="https://cdn-icons-png.flaticon.com/512/3448/3448609.png" alt="Logo">
+        </div>
+        <h1>RESTORAN KITA</h1>
+        <p>Premium Culinary Experience</p>
+    </header>
 
-    <div id="menuModal" class="modal" onclick="this.style.display='none'">
+    <div class="container" id="menu-container">
+        <p style="text-align: center; margin-top: 50px;">Memuat menu lezat...</p>
+    </div>
+
+    <div id="menuModal" class="modal" onclick="closeModal()">
         <div class="modal-content" onclick="event.stopPropagation()">
             <img id="mImg" class="modal-img">
-            <h2 id="mTitle" style="color:#f39c12"></h2>
-            <h3 id="mPrice" style="color:#fff"></h3>
-            <p id="mDesc" style="color:#ccc"></p>
-            <button class="close-btn" onclick="document.getElementById('menuModal').style.display='none'">Tutup</button>
+            <div class="modal-info">
+                <h2 id="mTitle" class="modal-title"></h2>
+                <span id="mPrice" class="modal-price"></span>
+                <p id="mDesc" class="modal-desc"></p>
+                <button class="close-btn" onclick="closeModal()">Kembali</button>
+            </div>
         </div>
     </div>
 
+    <footer>
+        &copy; 2024 Restoran Kita. Jl. Makanan No. 45<br>
+        Dibuat dengan ❤️ oleh Menu Digital
+    </footer>
+
     <script>
-        // Mengambil data JSON yang dibuat robot
-        fetch('menu.json')
-            .then(response => response.json())
-            .then(data => {
+        async function loadMenu() {
+            try {
+                const response = await fetch('menu.json?v=' + Date.now());
+                const data = await response.json();
                 const container = document.getElementById('menu-container');
-                container.innerHTML = ''; // Kosongkan loading
+                container.innerHTML = '';
 
-                // Loop Kategori (Makanan/Minuman)
                 for (const [category, subcats] of Object.entries(data)) {
-                    const catTitle = document.createElement('h2');
-                    catTitle.className = 'category-header';
-                    catTitle.innerText = category;
-                    container.appendChild(catTitle);
+                    const catHead = document.createElement('h2');
+                    catHead.className = 'category-header';
+                    catHead.innerText = category;
+                    container.appendChild(catHead);
 
-                    // Loop Sub-Kategori (Nasi/Mie/Kopi)
                     for (const [subcat, items] of Object.entries(subcats)) {
-                        const subTitle = document.createElement('h3');
-                        subTitle.className = 'subcategory-header';
-                        subTitle.innerText = subcat;
-                        container.appendChild(subTitle);
+                        const subHead = document.createElement('h3');
+                        subHead.className = 'subcategory-header';
+                        subHead.innerText = subcat;
+                        container.appendChild(subHead);
 
-                        const grid = document.createElement('div'); 
+                        const grid = document.createElement('div');
                         grid.className = 'menu-grid';
 
-                        // Loop Menu Items
                         items.forEach(item => {
                             const card = document.createElement('div');
                             card.className = 'menu-card';
-                            card.onclick = () => showModal(item);
                             card.innerHTML = `
                                 <img src="${item.image}" alt="${item.name}">
                                 <div class="menu-name">${item.name}</div>
                             `;
+                            card.onclick = () => openModal(item);
                             grid.appendChild(card);
                         });
                         container.appendChild(grid);
                     }
                 }
-            })
-            .catch(err => console.error('Gagal memuat menu:', err));
+            } catch (err) {
+                console.error('Error:', err);
+            }
+        }
 
-        function showModal(item) {
+        function openModal(item) {
+            const modal = document.getElementById('menuModal');
             document.getElementById('mImg').src = item.image;
             document.getElementById('mTitle').innerText = item.name;
             document.getElementById('mPrice').innerText = item.price;
             document.getElementById('mDesc').innerText = item.desc;
-            document.getElementById('menuModal').style.display = 'flex';
+            modal.classList.add('active');
         }
+
+        function closeModal() {
+            document.getElementById('menuModal').classList.remove('active');
+        }
+
+        loadMenu();
     </script>
 </body>
-
-</html>   
-
+</html>
