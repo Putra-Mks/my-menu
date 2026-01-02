@@ -43,6 +43,14 @@
                 "price": "Rp 20.000",
                 "desc": "Kopi Aren spesial dengan bumbu rahasia dan telur mata sapi."
             }
+        ],
+        "Minuman Dingin": [
+            {
+                "name": "Teh Susu",
+                "image": "data_menu/Minuman/Minuman Dingin/Teh_Susu.jpeg",
+                "price": "Tanya Harga",
+                "desc": ""
+            }
         ]
     }
 }
