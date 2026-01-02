@@ -1,0 +1,32 @@
+name: Update Menu Otomatis
+
+on:
+  push:
+    paths:
+      - 'data_menu/**' # Robot hanya jalan kalau folder menu berubah
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Generate Menu JSON
+        run: python generate_menu.py
+
+      - name: Commit & Push changes
+        run: |
+          git config --global user.name "MenuBot"
+          git config --global user.email "bot@noreply.github.com"
+          git add menu.json
+          git commit -m "Auto-update menu list" || echo "No changes to commit"
+          git push
