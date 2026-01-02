@@ -18,6 +18,12 @@
     "Minuman": {
         "Minuman Panas": [
             {
+                "name": "Teh Susu",
+                "image": "data_menu/Minuman/Minuman Panas/Teh_Susu.jpg",
+                "price": "Tanya Harga",
+                "desc": ""
+            },
+            {
                 "name": "Kopi Aren",
                 "image": "data_menu/Minuman/Minuman Panas/Kopi_Aren.jpeg",
                 "price": "Rp 20.000",
