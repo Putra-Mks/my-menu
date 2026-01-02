@@ -1,4 +1,13 @@
 {
-    "Makanan": {},
+    "Makanan": {
+        "Makanan Utama": [
+            {
+                "name": "Nasi Goreng",
+                "image": "data_menu/Makanan/Makanan Utama/Nasi_Goreng.jpeg",
+                "price": "Rp 25.000",
+                "desc": "Nasi goreng spesial dengan bumbu rahasia dan telur mata sapi."
+            }
+        ]
+    },
     "Minuman": {}
 }
