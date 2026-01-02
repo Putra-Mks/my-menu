@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Digital Otomatis</title>
+    <style>
+        /* CSS SAMA SEPERTI SEBELUMNYA, DITAMBAH GAYA UNTUK JUDUL KATEGORI */
+        body { background-color: #1a1a1a; color: #fff; font-family: sans-serif; padding: 20px; }
+        .category-header { color: #f39c12; border-bottom: 2px solid #333; margin: 30px 0 10px; padding-bottom: 5px; }
+        .subcategory-header { color: #ccc; margin: 20px 0 10px; font-size: 1.2rem; }
+        
+        .menu-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
+        .menu-card { background: #222; border-radius: 10px; overflow: hidden; }
+        .menu-card img { width: 100%; height: 150px; object-fit: cover; }
+        .menu-name { padding: 10px; font-weight: bold; text-align: center; }
+        
+        /* Modal Style (Sama seperti sebelumnya) */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); align-items: center; justify-content: center; z-index: 1000;}
+        .modal-content { background: #333; padding: 20px; border-radius: 10px; max-width: 90%; text-align: center; }
+        .modal-img { width: 100%; height: 200px; object-fit: cover; border-radius: 10px; }
+        .close-btn { background: #f39c12; border: none; padding: 10px 20px; margin-top: 15px; border-radius: 5px; cursor: pointer; font-weight: bold;}
+    </style>
+</head>
+<body>
+
+    <h1 style="text-align:center; color:#f39c12;">MENU KAMI</h1>
+    <div id="menu-container">Loading menu...</div>
+
+    <div id="menuModal" class="modal" onclick="this.style.display='none'">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <img id="mImg" class="modal-img">
+            <h2 id="mTitle" style="color:#f39c12"></h2>
+            <h3 id="mPrice" style="color:#fff"></h3>
+            <p id="mDesc" style="color:#ccc"></p>
+            <button class="close-btn" onclick="document.getElementById('menuModal').style.display='none'">Tutup</button>
+        </div>
+    </div>
+
+    <script>
+        // Mengambil data JSON yang dibuat robot
+        fetch('menu.json')
+            .then(response => response.json())
+            .then(data => {
+                const container = document.getElementById('menu-container');
+                container.innerHTML = ''; // Kosongkan loading
+
+                // Loop Kategori (Makanan/Minuman)
+                for (const [category, subcats] of Object.entries(data)) {
+                    const catTitle = document.createElement('h2');
+                    catTitle.className = 'category-header';
+                    catTitle.innerText = category;
+                    container.appendChild(catTitle);
+
+                    // Loop Sub-Kategori (Nasi/Mie/Kopi)
+                    for (const [subcat, items] of Object.entries(subcats)) {
+                        const subTitle = document.createElement('h3');
+                        subTitle.className = 'subcategory-header';
+                        subTitle.innerText = subcat;
+                        container.appendChild(subTitle);
+
+                        const grid = document.createElement('div');
+                        grid.className = 'menu-grid';
+
+                        // Loop Menu Items
+                        items.forEach(item => {
+                            const card = document.createElement('div');
+                            card.className = 'menu-card';
+                            card.onclick = () => showModal(item);
+                            card.innerHTML = `
+                                <img src="${item.image}" alt="${item.name}">
+                                <div class="menu-name">${item.name}</div>
+                            `;
+                            grid.appendChild(card);
+                        });
+                        container.appendChild(grid);
+                    }
+                }
+            })
+            .catch(err => console.error('Gagal memuat menu:', err));
+
+        function showModal(item) {
+            document.getElementById('mImg').src = item.image;
+            document.getElementById('mTitle').innerText = item.name;
+            document.getElementById('mPrice').innerText = item.price;
+            document.getElementById('mDesc').innerText = item.desc;
+            document.getElementById('menuModal').style.display = 'flex';
+        }
+    </script>
+</body>
+</html>
