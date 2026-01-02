@@ -6,6 +6,12 @@
                 "image": "data_menu/Makanan/Makanan Utama/Nasi_Goreng.jpeg",
                 "price": "Rp 25.000",
                 "desc": "Nasi goreng spesial dengan bumbu rahasia dan telur mata sapi."
+            },
+            {
+                "name": "Mie Jawa",
+                "image": "data_menu/Makanan/Makanan Utama/Mie_Jawa.jpeg",
+                "price": "Rp 35.000",
+                "desc": "Mie Jawa spesial dengan bumbu rahasia dan telur mata sapi."
             }
         ]
     },
